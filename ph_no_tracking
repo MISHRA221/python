@@ -1,10 +1,36 @@
 import phonenumbers
 from test import number
-
+import folium
 from phonenumbers import geocoder
+
+
+key = "0c4d751361d7426d96776c417cbab21b"
+
 ch_n=phonenumbers.parse(number,"CH")
-print(geocoder.description_for_number(ch_n,"en"))
+yourLocation=geocoder.description_for_number(ch_n,"en")
+print(yourLocation)
 
 from phonenumbers import carrier
+
 service=phonenumbers.parse(number,"RO")
 print(carrier.name_for_number(service,"en"))
+
+from opencage.geocoder import OpenCageGeocode
+
+geocoder=OpenCageGeocode(key)
+query=str(yourLocation)
+results= geocoder.geocode(query)
+#print(results)
+
+lat=results[0]['geometry']['lat']
+lng=results[0]['geometry']['lng']
+
+print(lat,lng)
+
+mymap=folium.Map(location=[lat,lng],zoom_start=9)
+
+folium.Marker([lat,lng],popup= yourLocation).add_to(mymap)
+mymap.save("mylocation.html")
+
+#C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli
+#py -m pip install --upgrade pip
