@@ -1,0 +1,30 @@
+#pip install pandas
+#py get-pip.py
+
+import pandas as pd 
+import csv
+df=pd.read_csv("heart.csv")
+
+df=df.drop(columns="Unnamed: 0")
+print(df)
+
+df['Thal']=df['Thal'].astype('category')
+df['Thal']=df['Thal'].cat.codes
+
+df['AHD']=df['AHD'].astype('category')
+df['AHD']=df['AHD'].cat.codes
+print(df)
+
+df.isnull().sum()
+
+df=df.dropna()
+print(df)
+
+x=df.drop(columns='AHD')
+print(x)
+y=df['AHD']
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y,train, y_test = train_test_split(x,y,test_size=0.3, random_state =21)
+print(x_train)
+print(x_test)
