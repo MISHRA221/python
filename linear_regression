@@ -40,3 +40,12 @@ log_reg=LogisticRegression(random_state=0).fit(x_train_scaled, y_train)
 log_reg.predict(x_train_scaled)
 
 log_reg.score(x_train_scaled, y_train)
+log_reg.score(x_test_scaled, y_test)
+
+log_reg1 = LogisticRegression(random_state=0,
+c=1,
+fit_intercept = True,
+).fit(x_train_scaled, y_train)
+
+log_reg1.score(x_train_scaled, y_train)
+log_reg1.score(x_test_scaled, y_test)
